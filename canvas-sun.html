@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+	<head></head>
+    <body style="background:#000;">
+    	<canvas width="1000" height="1000" style="background:#000; margin:0 auto; display:block;" id="canvas">
+        	你的浏览器不支持canvas标签
+        </canvas>
+        <script>
+			var cxt=document.getElementById('canvas').getContext('2d');
+			
+			function drawTrack(){
+				for(var i=0;i<8;i++){
+					cxt.beginPath();
+					cxt.arc(500,500,(i+1)*50,0,360,false);
+					cxt.closePath();
+					cxt.strokeStyle="#fff";
+					cxt.stroke();
+				}
+			}
+			drawTrack();
+			
+			function star(x,y,radius,cycle,scolor,ecolor){
+				//星球的坐标点
+				this.x=x;
+				this.y=y;
+				//星球的半径
+				this.radius=radius;
+				//星球的公转周期
+				this.cycle=cycle;
+				//星球的颜色
+				this.scolor=scolor;
+				this.ecolor=ecolor;
+				//新建一个渐变颜色空对象
+				this.color=null;
+				//设置一个定时器
+				this.time=0;
+				this.draw=function(){
+					//创建异次元
+					cxt.save();
+					//设置0，0点
+					cxt.translate(500,500);
+					//设置旋转角度
+					cxt.rotate(this.time*(360/this.cycle)*Math.PI/180);
+					//画星球
+					cxt.beginPath();
+					cxt.arc(this.x,this.y,this.radius,0,360,false);
+					//设置渐变颜色
+					cxt.closePath();
+					this.color=cxt.createRadialGradient(this.x,this.y,0,this.x,this.y,this.radius);
+					//设置渐变颜色开始点
+					this.color.addColorStop(0,this.scolor);
+					//设置渐变 颜色关闭点
+					this.color.addColorStop(1,this.ecolor);
+					cxt.fillStyle=this.color;
+					cxt.fill();
+					cxt.restore();
+					this.time +=1;
+				}
+				
+			}
+			
+			function Sun(){
+				star.call(this,0,0,20,0,'red','#f90')
+			}
+			function Sun2(){
+				star.call(this,0,-50,10,87.70,'#A69697','#5C3E40')
+			}
+			function Sun3(){
+				star.call(this,0,-100,10,365.2422,'#C4BBAC','#1F1315')
+			}
+			function Sun4(){
+				star.call(this,0,-150,10,686.98,'#78B1E8','#050C12')
+			}
+			function Sun5(){
+				star.call(this,0,-200,10,4332.589,'#CEC9B6','#76422D')
+			}
+			function Sun6(){
+				star.call(this,0,-250,10,10759.5,'#C0A4BE','#322')
+			}
+			function Sun7(){
+				star.call(this,0,-300,10,30799.095,'#A7E1E5','#19243A')
+			}
+			function Sun8(){
+				star.call(this,0,-350,10,60152,'#0661B2','#1E3B73')
+			}
+			var sun = new Sun();
+		 	var sun2 = new Sun2();
+			var sun3 = new Sun3();
+			var sun4 = new Sun4();
+			var sun5 = new Sun5();
+			var sun6 = new Sun6();
+			var sun7 = new Sun7();
+			var sun8 = new Sun8();
+			
+			function move(){
+				//清楚画布（）
+				cxt.clearRect(0,0,1000,1000);
+				//画出轨道
+				drawTrack();
+				
+				sun.draw();
+				
+				sun2.draw();
+				
+				sun3.draw();
+				
+				sun4.draw();
+				
+				sun5.draw();
+				
+				sun6.draw();
+				
+				sun7.draw();
+				
+				sun8.draw();
+			}
+			setInterval(move,10);
+		</script>
+		
+    </body>
+<html>

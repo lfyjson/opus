@@ -1,0 +1,9 @@
+body,ul,ol,h1,h2,h3,h4,h5,p,span,dd,dl,input,textarea,select{ padding:0; margin:0;outline:none;}
+ul{ margin:0; padding:0;}
+li{ list-style:none; }
+img{ border:none;}
+a{ text-decoration:none;}
+a:hover{ text-decoration:underline;}
+.clear{ zoom:1;}
+.clear:after{ content:'';displat:block; clear:botj;}
+
